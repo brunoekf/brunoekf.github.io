@@ -1,1 +1,28 @@
-E ai meu rei
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página de Login</title>
+    <script src="https://sdk.incognia.com/incognia.min.js"></script>
+</head>
+<body>
+    <h1>Página de Login</h1>
+    <label for="account_id">Account ID:</label>
+    <input type="text" id="account_id">
+    <button onclick="logar()">Logar</button>
+    <br><br>
+    <label id="session-token">Session Token:</label>
+
+    <script>
+        function logar() {
+            var accountId = document.getElementById("account_id").value;
+            var sessionToken = Incognia.getSessionToken();
+
+            // Redirecionar para a mesma página com o valor do campo account_id como parâmetro get na URL
+            window.location.href = window.location.pathname + "?account_id=" + accountId;
+
+            // Preencher o label session-token com o valor do sessionToken obtido do SDK da Incognia
+            document.getElementById("session-token").innerText = "Session Token: " + sessionToken;
+        }
+    </script>
+</body>
+</html>
