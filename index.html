@@ -2,7 +2,16 @@
 <html>
 <head>
     <title>Página de Login</title>
-    <script src="https://sdk.incognia.com/incognia.min.js"></script>
+    <!-- Asynchronous loading of the IncogniaWebSdk using defer -->
+    <script defer src="https://repo.incognia.com/web/latest/incognia-web-sdk.js"></script>
+
+    <!-- IncogniaWebSdk initialized after the DOM loads -->
+    <script>
+    window.addEventListener('DOMContentLoaded', () => 
+    window.IncogniaWebSdk.init('fde8ad2d-2a07-44d8-aeac-54f851f41dea')
+  )
+    </script>
+
 </head>
 <body>
     <h1>Página de Login</h1>
@@ -10,18 +19,22 @@
     <input type="text" id="account_id">
     <button onclick="logar()">Logar</button>
     <br><br>
-    <label id="session-token">Session Token:</label>
+    <label id="sessionToken">Session Token:</label>
 
     <script>
-        function logar() {
+        async function logar() {
             var accountId = document.getElementById("account_id").value;
-            var sessionToken = Incognia.getSessionToken();
+            const sessionToken = await IncogniaWebSdk.getSessionToken()
+            console.log(sessionToken)
+            console.log("Passou aqui")
 
             // Redirecionar para a mesma página com o valor do campo account_id como parâmetro get na URL
-            window.location.href = window.location.pathname + "?account_id=" + accountId;
+            //window.location.href = window.location.pathname + "?account_id=" + accountId;
 
             // Preencher o label session-token com o valor do sessionToken obtido do SDK da Incognia
-            document.getElementById("session-token").innerText = "Session Token: " + sessionToken;
+            document.getElementById("sessionToken").innerText = "Session Token: " + sessionToken;
+
+            
         }
     </script>
 </body>
