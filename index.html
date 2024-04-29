@@ -1,41 +1,57 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Página de Login</title>
-    <!-- Asynchronous loading of the IncogniaWebSdk using defer -->
-    <script defer src="https://repo.incognia.com/web/latest/incognia-web-sdk.js"></script>
+<!doctype html>
+<html class="no-js" lang="">
 
-    <!-- IncogniaWebSdk initialized after the DOM loads -->
-    <script>
-    window.addEventListener('DOMContentLoaded', () => 
-    window.IncogniaWebSdk.init('fde8ad2d-2a07-44d8-aeac-54f851f41dea')
-  )
-    </script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#fafafa">
+  <script>
+    window.addEventListener('DOMContentLoaded', () =>
+      window.IncogniaWebSdk.init('3048e4b7-5938-49d8-abeb-4bee270bdcca')
+    )
+  </script>
+  <!-- Add your site or application content here -->
+  <p>Hello world! This is HTML5 Boilerplate.</p>
+  <script src="js/app.js"></script>
+  <script src="js/klarna_toolkit.js"></script>
+  <script
+    defer src="https://repo.incognia.com/web/latest/incognia-web-sdk.js">
+
+  </script>
+
 
 </head>
+
+
 <body>
-    <h1>Página de Login</h1>
-    <label for="account_id">Account ID:</label>
-    <input type="text" id="account_id">
-    <button onclick="logar()">Logar</button>
-    <br><br>
-    <label id="sessionToken">Session Token:</label>
 
-    <script>
-        async function logar() {
-            var accountId = document.getElementById("account_id").value;
-            const sessionToken = await IncogniaWebSdk.getSessionToken()
-            console.log(sessionToken)
-            console.log("Passou aqui")
+<input type="text" id="phone_number">
+<label id="session-token">Session Token:
+</label>
+<button onclick="displaySessionToken()" id="bot">Session_token
+  </button>
+<p id="displayText">Your text will appear here</p>
+<script>
+  async function displaySessionToken() {
+    const sessionToken = await IncogniaWebSdk.getSessionToken()
+    document.getElementById("session-token").innerText = "Session Token: " + sessionToken;
+  }
+</script>
 
-            // Redirecionar para a mesma página com o valor do campo account_id como parâmetro get na URL
-            //window.location.href = window.location.pathname + "?account_id=" + accountId;
-
-            // Preencher o label session-token com o valor do sessionToken obtido do SDK da Incognia
-            document.getElementById("sessionToken").innerText = "Session Token: " + sessionToken;
-
-            
-        }
-    </script>
 </body>
+
 </html>
